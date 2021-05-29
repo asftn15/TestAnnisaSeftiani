@@ -75,10 +75,34 @@ const updateInsurance = (req, res) => {
     });
 };
 
+const updateStatusCode = (req, res) => {
+    const id = parseInt(req.params.id);
+    const active = parseInt(req.params.active);    
+
+    pool.query(queries.getInsuranceById, [id], (error, results) => {
+        const noInsuranceData = !results.rows.length;
+        if(noInsuranceData){
+            res.send("Insurance data doesn't exist in database.");
+        }
+        else{
+            pool.query(queries.updateStatusCode, [active, id], (error, results) => {
+                if(error){
+                    throw error;
+                }
+                
+                const statActive = active == 0 ? "inactive" : "active";
+                
+                res.status(200).send("Insurance data is "+statActive);
+            });
+        }
+    });
+};
+
 module.exports = {
     getInsurance,
     getInsuranceById,
     addInsurance,
     deleteInsuranceById,
     updateInsurance,
+    updateStatusCode,
 };

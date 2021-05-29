@@ -5,7 +5,7 @@ const UpdateInsurance = ({insuranceData}) => {
     const [name, setName] = useState(insuranceData.name);
     const [active, setActive] = useState(insuranceData.active);
 
-    var activeVal = active == false ? 0 : 1;
+    var activeVal = active === false ? 0 : 1;
     var currDate = new Date().toLocaleString();
 
     const onBtnUpdateClick = async () => {

@@ -4,7 +4,7 @@ const CreateInsurance = () => {
     const [name, setName] = useState("");
     const [active, setActive] = useState(false);
 
-    var activeVal = active == true ? 1 : 0;
+    var activeVal = active === true ? 1 : 0;
     var currDate = new Date().toLocaleString();
 
     const onBtnAddClick = async => {
